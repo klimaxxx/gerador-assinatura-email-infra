@@ -23,7 +23,15 @@ variable "iam_instance_profile" {
 }
 
 variable "user_data" {
-  description = "User data para EC2 (ex: script Docker)"
+  description = "User data script para inicialização (ex: Docker)"
   type        = string
-  default     = ""
-} 
+  default     = "<<-EOF
+#!/bin/bash
+yum update -y
+amazon-linux-extras enable docker
+yum install -y docker
+service docker start
+usermod -aG docker ec2-user
+systemctl enable docker
+EOF"
+}
