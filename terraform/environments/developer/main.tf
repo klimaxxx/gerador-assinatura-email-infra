@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.aws_region
+}
+
 module "vpc" {
   source              = "../../modules/vpc"
   cidr_block          = "10.30.0.0/16"
@@ -26,7 +30,7 @@ module "ec2" {
   subnet_id           = module.vpc.public_subnet_id
   security_group_ids  = [module.security_group.security_group_id]
   iam_instance_profile = var.iam_instance_profile
-  user_data           = var.user_data
+  user_data           = file("${path.module}/user_data.sh")
   tags = {
     Environment = "developer"
     Project     = "gerador-assinatura-email"
