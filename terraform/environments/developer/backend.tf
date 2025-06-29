@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "meu-terraform-state-developer"
-    key            = "developer/terraform.tfstate"
+    bucket         = "gerador-template-email"
+    key            = "staging/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "meu-terraform-lock-table"
+    dynamodb_table = "gerador-template-email-lock-table"
     encrypt        = true
   }
 } 
